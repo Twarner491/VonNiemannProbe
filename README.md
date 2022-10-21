@@ -1,5 +1,5 @@
 # Von Niemann Probe
-### Devoloped by [Teddy Warner](https://teddywarner.org/About-Me/about/) and [Jack Hollingsworth]([http://fabacademy.org/2021/labs/charlotte/students/drew-griggs/about/](http://fabacademy.org/2021/labs/charlotte/students/jack-hollingsworth/about/)).
+### Devoloped by [Teddy Warner](https://teddywarner.org/About-Me/about/) and [Jack Hollingsworth](http://fabacademy.org/2021/labs/charlotte/students/jack-hollingsworth/about/).
 
 A AVR based bluetooth telegraph inlayed in a parametric shoe insole. 
 
