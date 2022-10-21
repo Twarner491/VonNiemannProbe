@@ -93,6 +93,7 @@ def getPlayerMove(move):
             if char.isdigit() == True:
                 numCount += 1 #reflect that at least one number in string
             i += 1
+            #print(char + "is legal") #debug bad chars function
     if len(move) != 4 and len(move) != 5: #solve edge case where small string doesn't break other rules
         noBadChars = False;
     if charCount == 0 or numCount == 0:
@@ -106,7 +107,6 @@ def getPlayerMove(move):
         print("Legal? " + str(legal))
     if legal and noBadChars: #move can only happen if legal and doesn't contain illegal chars
         fish.make_moves_from_current_position([move])#plays legal player move in STOCKFISH
-        print("move registered in stockfish")
         chessMove = chess.Move.from_uci(move) #load legal player move
         board.push_san(move) #send player move to board tracker
         print("player plays " + move)
@@ -128,8 +128,8 @@ def toMorse(move): #convert move to morse code
     print("Morse-Converted Move: " + ret)
     return ret
       
-fish = Stockfish(r"C:\Users\jackh\Downloads\stockfish_15_win_x64_avx2\stockfish_15_win_x64_avx2\stockfish_15_x64_avx2.exe")
-print(str(fish.get_parameters()))
+fish = Stockfish(r"C:\Users\jackh\Downloads\stockfish_15_win_x64_avx2\stockfish_15_win_x64_avx2\stockfish_15_x64_avx2.exe", 
+depth=18, parameters={"Threads": 4, "Hash": 256"UCI_LimitStrength": "false"}) #stockfish object declaration, can regulate strength
 print("WDL Accepted " + str(fish.does_current_engine_version_have_wdl_option()))
 print("Board State " + fish.get_board_visual())
 
