@@ -129,6 +129,7 @@ def toMorse(move): #convert move to morse code
     return ret
       
 fish = Stockfish(r"C:\Users\jackh\Downloads\stockfish_15_win_x64_avx2\stockfish_15_win_x64_avx2\stockfish_15_x64_avx2.exe")
+print(str(fish.get_parameters()))
 print("WDL Accepted " + str(fish.does_current_engine_version_have_wdl_option()))
 print("Board State " + fish.get_board_visual())
 
