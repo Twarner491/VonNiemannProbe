@@ -6,5 +6,6 @@ A AVR based bluetooth telegraph inlayed in a parametric shoe insole.
 ## Sources -
  - [https://www.cnn.com/2022/10/20/us/hans-niemann-chess-cheating-scandal-defamation-lawsuit-spt-intl/index.html](https://www.cnn.com/2022/10/20/us/hans-niemann-chess-cheating-scandal-defamation-lawsuit-spt-intl/index.html)
  - [https://twitter.com/hansmokeniemann](https://twitter.com/hansmokeniemann)
+ - [https://futurism.com/von-neumann-probe](https://futurism.com/von-neumann-probe)
 
 ## Documentation -
