@@ -9,3 +9,8 @@ A AVR based bluetooth telegraph inlayed in a parametric shoe insole.
  - [https://futurism.com/von-neumann-probe](https://futurism.com/von-neumann-probe)
 
 ## Documentation -
+
+---
+- [Fork this repository](https://github.com/Twarner491/VonNiemannProbe/fork)
+- [Watch this repo](https://github.com/Twarner491/VonNiemannProbe/subscription)
+- [Create issue](https://github.com/Twarner491/VonNiemannProbe/issues/new)
