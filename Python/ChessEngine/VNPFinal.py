@@ -1,3 +1,5 @@
+#currently supported, dynamic implementation of stockfish and bluetooth, "the true brains of the Von Niemann Probe"
+
 from stockfish import Stockfish
 import chess
 import time

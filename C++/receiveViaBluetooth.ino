@@ -1,3 +1,5 @@
+//basic receiving code to turn on led when "passcode" received from a parallel python program running locally
+
 #include <SoftwareSerial.h>
 SoftwareSerial HC06(10, 11); //HC06-TX Pin 10, HC06-RX to Arduino Pin 11
 
