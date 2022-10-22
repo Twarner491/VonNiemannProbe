@@ -13,7 +13,7 @@ A AVR based bluetooth telegraph inlayed in a parametric shoe insole.
  - [http://www.sizecharter.com/clothing-fit-and-measurement/understanding-shoe-sizing](http://www.sizecharter.com/clothing-fit-and-measurement/understanding-shoe-sizing)
  - [https://www.researchgate.net/figure/The-Mean-of-Absolute-in-mm-and-Relative-in-FL-Foot-Dimensions-for-Both-Genders-a_tbl2_327021689](https://www.researchgate.net/figure/The-Mean-of-Absolute-in-mm-and-Relative-in-FL-Foot-Dimensions-for-Both-Genders-a_tbl2_327021689)
  - [https://www.researchgate.net/figure/Measurements-of-the-foot-and-the-inner-shoe-dimensions-a-Foot-Length-FL-and-Foot_fig5_280976288](https://www.researchgate.net/figure/Measurements-of-the-foot-and-the-inner-shoe-dimensions-a-Foot-Length-FL-and-Foot_fig5_280976288)
- -[https://www.protalus.com/blogs/news/how-to-measure-feet](https://www.protalus.com/blogs/news/how-to-measure-feet)
+ - [https://www.protalus.com/blogs/news/how-to-measure-feet](https://www.protalus.com/blogs/news/how-to-measure-feet)
 
 ## Documentation -
 
