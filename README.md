@@ -4,7 +4,7 @@
 A AVR based bluetooth telegraph inlayed in a parametric shoe insole. 
 
 ## Sources -
- - [https://www.cnn.com/2022/10/20/us/hans-niemann-chess-cheating-scandal-defamation-lawsuit-spt-intl/index.html](https://www.cnn.com/2022/10/20/us/hans-niemann-chess-cheating-scandal-defamation-lawsuit-spt-intl/index.html)
+ - [https://www.npr.org/2022/10/21/1130442319/hans-niemann-sues-magnus-carlsen-for-100-million-accusing-him-of-defamation](https://www.npr.org/2022/10/21/1130442319/hans-niemann-sues-magnus-carlsen-for-100-million-accusing-him-of-defamation)
  - [https://twitter.com/hansmokeniemann](https://twitter.com/hansmokeniemann)
  - [https://futurism.com/von-neumann-probe](https://futurism.com/von-neumann-probe)
  - [https://ww1.microchip.com/downloads/en/DeviceDoc/ATtiny212-412-DataSheet-DS40001911B.pdf](https://ww1.microchip.com/downloads/en/DeviceDoc/ATtiny212-412-DataSheet-DS40001911B.pdf)
