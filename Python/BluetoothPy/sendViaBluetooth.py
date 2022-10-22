@@ -1,17 +1,19 @@
-#basic sending program to determine whether hc-06 can function well with python
+#basic sending program to determine whether hc-06 can function well with
 
-import serial
+import serial; import re
 
 ser = serial.Serial("COM4", 9600, timeout = 1) #Change your port name COM... and your baudrate
 
-def retrieveData():
-    ser.write(b'1')
-    data = ser.readline().decode('ascii')
-    return data
-
 while(True):
     uInput = input("Retrieve data? ")
-    if uInput == '1': #send 69 in bytes when input of 1 received 
-        ser.write(b'69')
-    else:
+    uInput = re.sub("[ ]", "9", uInput) #replace spaces with something that will never appear in a chess move, 9 in this case
+    #print(uInput) #print input with spaces replaced with 9
+    for char in uInput:
+        tempChar = char.encode() #creative tempChar string that carries encoded char
+        ser.write(tempChar) #send encdoed char via bluetooth
+    '''if uInput == '1': #send 69 in bytes when input of 1 received 
+        ser.write(b'6')
+    elif uInput == '0':
         ser.write(b'0') #send bad data if input not 1
+    else:
+        ser.write('''
