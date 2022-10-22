@@ -4,6 +4,7 @@ from stockfish import Stockfish
 import chess
 import time
 import serial
+import re
 
 global board; global fish
 global legal; global legalMoves
@@ -38,6 +39,7 @@ def playGame(side):
             board.push_san(bestMove)
             print("whitefish plays " + bestMove)
             morseMove = toMorse(bestMove) #call morse conversion of fish move
+            sendMove(morseMove) #send morse move via bluetooth
             mate = board.is_checkmate() #returns state of checkmate
             print("Checkmate: " + str(mate)) #prints state of checkmate after every fish move
             if mate == True:
@@ -65,6 +67,7 @@ def playGame(side):
             board.push_san(bestMove)
             print("blackfish plays " + bestMove)
             morseMove = toMorse(bestMove) #get string of morse-converted move, not in use
+            sendMove(morseMove) #send morse move via bluetooth
             mate = board.is_checkmate() #returns state of checkmate
             print("Checkmate: " + str(mate)) #prints state of checkmate after every fish move
             if mate == True:
@@ -130,19 +133,24 @@ def toMorse(move): #convert move to morse code
         ret += newConvert + ' ' #add morse for new char to morse string
     print("Morse-Converted Move: " + ret)
     return ret
+
+def sendMove(morse):
+    morse = re.sub("[ ]", "9", morse)
+    print(morse) #print morse move with spaces replaced with 9
+    for char in morse:
+        tempChar = char.encode() #temporary placeholder set to current char in morse move
+        ser.write(tempChar)
+    print("sent move")
+    return
+
       
 fish = Stockfish(r"C:\Users\jackh\Downloads\stockfish_15_win_x64_avx2\stockfish_15_win_x64_avx2\stockfish_15_x64_avx2.exe", 
-depth=18, parameters={"Threads": 4, "Hash": 256 "UCI_LimitStrength": "false"}) #stockfish object declaration, can regulate strength
+depth=18, parameters={"Threads": 4, "Hash": 256, "UCI_LimitStrength": "false"}) #stockfish object declaration, can regulate strength
 print("WDL Accepted " + str(fish.does_current_engine_version_have_wdl_option()))
 print("Board State " + fish.get_board_visual())
 
-ser = serial.Serial()
-ser.baudrate = 115200
-ser.port = 'COM4'
-ser
-ser.open()
-print("testing serial...")
-ser.write("serial test")
+ser = serial.Serial("COM4", 9600, timeout = 1) #open com port of hc-06 receiving, set to 9600 baud
+print("serial opened")
 
 while True: #enables playing of inifinite games, playGame() returns to here after checkmate
     isMate = False

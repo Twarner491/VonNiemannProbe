@@ -1,3 +1,5 @@
+#complete implementation without bluetooth sending, everything else works though so can easily be iterated upon
+
 from stockfish import Stockfish
 import chess
 import time
