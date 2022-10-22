@@ -1,6 +1,7 @@
 from stockfish import Stockfish
 import chess
 import time
+import serial
 
 global board; global fish
 global legal; global legalMoves
@@ -132,6 +133,14 @@ fish = Stockfish(r"C:\Users\jackh\Downloads\stockfish_15_win_x64_avx2\stockfish_
 depth=18, parameters={"Threads": 4, "Hash": 256 "UCI_LimitStrength": "false"}) #stockfish object declaration, can regulate strength
 print("WDL Accepted " + str(fish.does_current_engine_version_have_wdl_option()))
 print("Board State " + fish.get_board_visual())
+
+ser = serial.Serial()
+ser.baudrate = 115200
+ser.port = 'COM4'
+ser
+ser.open()
+print("testing serial...")
+ser.write("serial test")
 
 while True: #enables playing of inifinite games, playGame() returns to here after checkmate
     isMate = False
