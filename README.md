@@ -8,6 +8,8 @@ A AVR based bluetooth telegraph inlayed in a parametric shoe insole.
  - [https://twitter.com/hansmokeniemann](https://twitter.com/hansmokeniemann)
  - [https://futurism.com/von-neumann-probe](https://futurism.com/von-neumann-probe)
  - [https://ww1.microchip.com/downloads/en/DeviceDoc/ATtiny212-412-DataSheet-DS40001911B.pdf](https://ww1.microchip.com/downloads/en/DeviceDoc/ATtiny212-412-DataSheet-DS40001911B.pdf)
+ - [https://components101.com/sites/default/files/component_datasheet/HC06%20Bluetooth%20Module%20Datasheet.pdf](https://components101.com/sites/default/files/component_datasheet/HC06%20Bluetooth%20Module%20Datasheet.pdf)
+ -[https://components101.com/wireless/hc-06-bluetooth-module-pinout-datasheet](https://components101.com/wireless/hc-06-bluetooth-module-pinout-datasheet)
 
 ## Documentation -
 
