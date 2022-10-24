@@ -1,15 +1,24 @@
+//(c) Teddy Warner & Jack Hollingsworth - 2022
+
+//This work may be reproduced, modified, distributed, performed, and displayed
+//for any purpose, but must acknowledge Teddy Warner  & Jack Hollingsworth.
+//Copyright is retained and must be preserved. The work is provided as is;
+//no warranty is provided, and users accept all liability.
+
 /*
+
   Morse Code Project
   
   This code will loop through a string of characters and convert these to morse code.  
   It will blink two LED lights and play audio on a speaker.  
  */
- 
+
+#include <Arduino.h> //Arduino Parent Lib
  
 //**************************************************//
 //   Type the String to Convert to Morse Code Here  //
 //**************************************************//
-char stringToMorseCode[] = "sex penis";
+char stringToMorseCode[] = "teddy is cool";
 
 int morseOutput = 13;      //pin of morse output
 int led6 = 6;        

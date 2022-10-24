@@ -1,5 +1,13 @@
-//practice learning morse code with an led, buzzer or anal vibrator!
+//(c) Teddy Warner & Jack Hollingsworth - 2022
+
+//This work may be reproduced, modified, distributed, performed, and displayed
+//for any purpose, but must acknowledge Teddy Warner  & Jack Hollingsworth.
+//Copyright is retained and must be preserved. The work is provided as is;
+//no warranty is provided, and users accept all liability.
+
 //only for learning a-h and 1-8 of morse
+
+#include <Arduino.h> //Arduino Parent Lib
 
 int outputPin = 13; //pin of whatever output does morse
 int index;
