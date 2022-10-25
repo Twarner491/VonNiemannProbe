@@ -1,6 +1,6 @@
 {
     "board": "arduino:avr:uno",
     "programmer": "arduino:avrisp",
-    "port": "COM3",
+    "port": "COM6",
     "sketch": "C++\\textToMorse\\textToMorse.ino"
 }

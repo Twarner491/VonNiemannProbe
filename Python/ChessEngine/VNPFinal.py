@@ -1,10 +1,11 @@
 #currently supported, dynamic implementation of stockfish and bluetooth, "the true brains of the Von Niemann Probe"
+#10/25 - add function to detect player victory
 
-from stockfish import Stockfish
-import chess
+from stockfish import Stockfish #pip install stockfish
+import chess #pip install pychess
 import time
 import serial
-import re
+import re #pip install re
 
 global board; global fish
 global legal; global legalMoves
@@ -149,7 +150,7 @@ depth=18, parameters={"Threads": 4, "Hash": 256, "UCI_LimitStrength": "false"}) 
 print("WDL Accepted " + str(fish.does_current_engine_version_have_wdl_option()))
 print("Board State " + fish.get_board_visual())
 
-ser = serial.Serial("COM4", 9600, timeout = 1) #open com port of hc-06 receiving, set to 9600 baud
+ser = serial.Serial("COM5", 9600, timeout = 1) #open com port of hc-06 receiving, set to 9600 baud
 print("serial opened")
 
 while True: #enables playing of inifinite games, playGame() returns to here after checkmate

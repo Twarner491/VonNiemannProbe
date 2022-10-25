@@ -5,11 +5,8 @@
   It will blink two LED lights and play audio on a speaker.  
  */
  
- 
-//**************************************************//
-//   Type the String to Convert to Morse Code Here  //
-//**************************************************//
-char stringToMorseCode[] = "sex penis";
+
+char stringToMorseCode[] = "sex penis"; //static string to convert
 
 int morseOutput = 13;      //pin of morse output
 int led6 = 6;        
@@ -58,6 +55,7 @@ void loop()
 	tmpChar = toLowerCase(tmpChar);
 	// Call the subroutine to get the morse code equivalent for this character
 	GetChar(tmpChar);
+	Serial.print(stringToMorseCode);
   }
   
   // At the end of the string long pause before looping and starting again
