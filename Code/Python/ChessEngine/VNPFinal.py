@@ -1,3 +1,10 @@
+#(c) Teddy Warner & Jack Hollingsworth - 2022
+
+#This work may be reproduced, modified, distributed, performed, and displayed
+#for any purpose, but must acknowledge Teddy Warner  & Jack Hollingsworth.
+#Copyright is retained and must be preserved. The work is provided as is;
+#no warranty is provided, and users accept all liability.
+
 #currently supported, dynamic implementation of stockfish and bluetooth, "the true brains of the Von Niemann Probe"
 #10/25 - add function to detect player victory
 
