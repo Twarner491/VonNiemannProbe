@@ -28,8 +28,8 @@ Various Python dependencies are needed to run the VNPFinal.py script, but overal
 The outgoing COM port of the Bluetooth module must be updated, this can be found in device manager in all Windows 7+ machines. 
 Install commands for all Python dependencies are below.
 
-'''python
+```python
 pip install re
 pip install pychess
 pip install stockfish
-'''
+```
