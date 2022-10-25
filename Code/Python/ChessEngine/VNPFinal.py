@@ -58,6 +58,10 @@ def playGame(side):
             print("black move:") #request player move
             move = input()
             getPlayerMove(move)
+            mate = board.is_checkmate() #check if player has won
+            if mate == True:
+               print("checkmate, player victory")
+               return
             turns += 1
             print("board after " + str(turns) + " moves:")
             print(fish.get_board_visual(False)) #shows board from player perspective (white)
@@ -69,6 +73,10 @@ def playGame(side):
             print("white move:")
             move = input()
             getPlayerMove(move)
+            mate = board.is_checkmate() #check if player has won
+            if mate == True:
+               print("checkmate, player victory")
+               return
             bestMove = fish.get_best_move(1000) #stockfish get best current move
             fish.make_moves_from_current_position([bestMove]); 
             chessMove = chess.Move.from_uci(bestMove)
