@@ -24,10 +24,10 @@ A AVR based bluetooth telegraph inlayed in a parametric shoe insole.
 
 ## Python Dependencies - 
 
-Various Python dependencies are needed to run the VNPFinal.py script, but overall the installation is pretty lightweight. The only change that needs to be made locally is the path of Stockfish, which must be downlaoded from [here](https://stockfishchess.org/download/) prior to use. Any version of Stockfish, should work, but we have only test on the latest version (Version 15). 
+Various Python dependencies are needed to run the VNPFinal.py script, but overall the installation is pretty lightweight. The only change that needs to be made locally is the path of your stockfish .exe, which must be downlaoded from [here](https://stockfishchess.org/download/) prior to use. Any version of Stockfish should work, but we have only tested on the latest version (Version 15). 
 <br/><br/>
 The outgoing COM port of the Bluetooth module must be updated, this can be found in device manager in all Windows 7+ machines. 
-Install commands for all Python dependencies are below.
+Install commands for all Python dependencies are below, any release past Python 3.7 will work.
 
 ```python
 pip install re
