@@ -96,8 +96,6 @@ def playGame(side):
         print("")
         return #return to infinite loop
 
-
-
 def getPlayerMove(move):
     global board; global moveAdjusted; global badChars; global morseMove
     noBadChars = True #reset no bad chars bool
@@ -139,7 +137,6 @@ def getPlayerMove(move):
         getPlayerMove(newMove)
         return #back to game loop
 
-
 def toMorse(move): #convert move to morse code
     ret = "" #empty morse conversion
     newConvert = "" #empty mid-conversion string
@@ -159,8 +156,7 @@ def sendMove(morse):
     print("sent move")
     return
 
-      
-fish = Stockfish(r"C:\Users\jackh\Downloads\stockfish_15_win_x64_avx2\stockfish_15_win_x64_avx2\stockfish_15_x64_avx2.exe", 
+fish = Stockfish(r"https://github.com/Twarner491/VonNiemannProbe/blob/main/Code/Python/Stockfish/stockfish_15_x64_avx2.exe", 
 depth=18, parameters={"Threads": 4, "Hash": 256, "UCI_LimitStrength": "false"}) #stockfish object declaration, can regulate strength
 print("WDL Accepted " + str(fish.does_current_engine_version_have_wdl_option()))
 print("Board State " + fish.get_board_visual())
