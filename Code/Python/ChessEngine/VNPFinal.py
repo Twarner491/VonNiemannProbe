@@ -9,10 +9,10 @@
 #10/25 - add function to detect player victory
 
 from stockfish import Stockfish #pip install stockfish
-import chess #pip install pychess
+import chess #pip install python-chess
 import time
 import serial
-import re #pip install re
+import re #pip install regex
 
 global board; global fish
 global legal; global legalMoves

@@ -30,7 +30,7 @@ The outgoing COM port of the Bluetooth module must be updated, this can be found
 Install commands for all Python dependencies are below, any release past Python 3.7 will work.
 
 ```python
-pip install re
-pip install pychess
+pip install regex
+pip install python-chess
 pip install stockfish
 ```
