@@ -29,7 +29,7 @@ morseDict = { 'a':'.-', 'b':'-...',
    'f':'..-.', 'g':'--.', 'h':'....',
    '1':'.----', '2':'..---', '3':'...--',
    '4':'....-', '5':'.....', '6':'-....',
-   '7':'--...', '8':'---..'} #morse dict for all chars in chess moves
+   '7':'--...', '8':'---..'} #morse dict for all chars in chess moves, other characters not needed here
 
 board = chess.Board(); #create chess board object
 
@@ -41,7 +41,7 @@ morseMove = "" #placeholder for morse code move, filled later
 fish = Stockfish(r"{0}".format(stockfishPath), 
 depth=18, parameters={"Threads": 4, "Hash": 256, "UCI_LimitStrength": "false"}) #stockfish object declaration, can regulate strength
 print("WDL Accepted " + str(fish.does_current_engine_version_have_wdl_option()))
-print("Board State " + fish.get_board_visual())
+print("Board State " + fish.get_board_visual()) #prints unicode image of current board state
 
 ser = serial.Serial(port, 9600, timeout = 1) #open com port of hc-06 receiving, set to 9600 baud
 print("serial opened")
@@ -51,17 +51,17 @@ def playGame(side):
     global board; global isMate; global morseMove; 
     mate = False #checkmate state declaration
     turns = 0; i = 0 #these could be the same, but easier to keep sep = SPAGHETTIOLI CODE MOMENT
-    board = chess.Board(); #declare chess board object in chess module
+    board = chess.Board(); #declare chess board object in pychess module, for checking legality of moves
     print("fish playing as " + side)
     if side == "white":
         while mate == False: #if game not over, play continues
             bestMove = fish.get_best_move(1000) #stockfish get best current move
             fish.make_moves_from_current_position([bestMove]); 
-            chessMove = chess.Move.from_uci(bestMove)
-            board.push_san(bestMove)
+            chessMove = chess.Move.from_uci(bestMove) #create chessMove object in pychess, push it to board on next line
+            board.push_san(bestMove) ##make move in pychess to keep up with stockfish game
             print("whitefish plays " + bestMove)
             morseMove = toMorse(bestMove) #call morse conversion of fish move
-            sendMove(morseMove) #send morse move via bluetooth
+            sendMove(morseMove) #call to move sending function, arg is stockfish best move
             mate = board.is_checkmate() #returns state of checkmate
             print("Checkmate: " + str(mate)) #prints state of checkmate after every fish move
             if mate == True:
@@ -162,16 +162,16 @@ def toMorse(move): #convert move to morse code
 
 def sendMove(morse):
     morse = re.sub("[ ]", "9", morse)
-    print(morse) #print morse move with spaces replaced with 9
+    print(morse) #print morse move with spaces replaced with 9 - easier to parse on arduino side as empty bytes hard to work with
     for char in morse:
         tempChar = char.encode() #temporary placeholder set to current char in morse move
-        ser.write(tempChar)
+        ser.write(tempChar) #send individual character of final morse message encoded in utf-8
     print("sent move")
     return
 
-while True: #enables playing of inifinite games, playGame() returns to here after checkmate
+while True: #enables playing of inifinite games, playGame() returns to here after checkmate, resets all local values
     isMate = False
     print("good chess speaks for itself, welcome to Von Niemann Probe")
     print("side of stockfish:") #request side of stockfish player
-    fishSide = input() #laptop user input
-    playGame(fishSide)
+    fishSide = input() #which side is hans niemann on?
+    playGame(fishSide) #initiate game with advantage player's side receiving hints based on other player's moves
