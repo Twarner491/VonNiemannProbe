@@ -156,8 +156,7 @@ def sendMove(morse):
     print("sent move")
     return
 
-fish = Stockfish(r"https://github.com/Twarner491/VonNiemannProbe/blob/main/Code/Python/Stockfish/stockfish_15_x64_avx2.exe", 
-depth=18, parameters={"Threads": 4, "Hash": 256, "UCI_LimitStrength": "false"}) #stockfish object declaration, can regulate strength
+fish = Stockfish(r"Code\Python\Stockfish\stockfish_15_x64_avx2.exe", depth=18, parameters={"Threads": 4, "Hash": 256, "UCI_LimitStrength": "false"}) #stockfish object declaration, can regulate strength
 print("WDL Accepted " + str(fish.does_current_engine_version_have_wdl_option()))
 print("Board State " + fish.get_board_visual())
 
