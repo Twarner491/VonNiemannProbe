@@ -5,8 +5,6 @@
 //Copyright is retained and must be preserved. The work is provided as is;
 //no warranty is provided, and users accept all liability.
 
-//basic function for receiving from bluetooth
-
 #include <Arduino.h> //Arduino Parent Lib
 #include <SoftwareSerial.h> //software serial library, native in base installation of ide
 
