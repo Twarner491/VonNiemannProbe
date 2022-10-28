@@ -5,8 +5,7 @@
 #Copyright is retained and must be preserved. The work is provided as is;
 #no warranty is provided, and users accept all liability.
 
-#currently supported, dynamic implementation of stockfish and bluetooth, "the true brains of the Von Niemann Probe"
-#10/25 - add function to detect player victory
+#download stockfish from https://stockfishchess.org/files/stockfish_15_win_x64_avx2.zip
 
 from stockfish import Stockfish #pip install stockfish
 import chess #pip install python-chess
@@ -23,7 +22,7 @@ global stockfishPath
 
 port = "COM4" #set bluetooth port
 
-stockfishPath = "C:/Users/jackh/Downloads/stockfish_15_win_x64_avx2/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2.exe" #replace URL with the path to your Stockfish exe. Note - the path may only contain forward slashes, no backslashes.
+stockfishPath = "C:/Users/jackh/Downloads/stockfish_15_win_x64_avx2/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2.exe" #replace with the path to your Stockfish exe. Note - the path may only contain forward slashes, no backslashes.
 
 morseDict = { 'a':'.-', 'b':'-...',
    'c':'-.-.', 'd':'-..', 'e':'.',
@@ -80,7 +79,7 @@ def playGame(side):
             turns += 1
             print("board after " + str(turns) + " moves:")
             print(fish.get_board_visual(False)) #shows board from player perspective (white)
-        print("checkmate, stockfish victory")
+        print("")
         return #return to infinite loop
     if side == "black":
         legalMoves = str(board.legal_moves) #convert list to string
@@ -107,7 +106,6 @@ def playGame(side):
             turns += 1
             print("board after " + str(turns) + " moves:")
             print(fish.get_board_visual()) #shows board from player perspective (black)
-        print("checkmate, stockfish victory!")
         print("")
         return #return to infinite loop
 
