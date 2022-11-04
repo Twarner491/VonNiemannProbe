@@ -5,12 +5,7 @@
 //Copyright is retained and must be preserved. The work is provided as is;
 //no warranty is provided, and users accept all liability.
 
-//basic function for receiving from bluetooth
-
-<<<<<<< HEAD:C++/finalBluetooth/receiveViaBluetooth.ino
-=======
 #include <Arduino.h> //Arduino Parent Lib
->>>>>>> 3fac2310182d0152c934b33a539efb810c88ace9:Code/C++/finalBluetooth/receiveViaBluetooth.ino
 #include <SoftwareSerial.h> //software serial library, native in base installation of ide
 
 SoftwareSerial HC06(10, 11); //HC06-TX Pin 10, HC06-RX to Arduino Pin 11

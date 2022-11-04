@@ -2,5 +2,5 @@
     "board": "arduino:avr:uno",
     "programmer": "arduino:avrisp",
     "port": "COM6",
-    "sketch": "C++\\textToMorse\\textToMorse.ino"
+    "sketch": "Code\\C++\\finalBluetooth\\receiveViaBluetooth.ino"
 }
