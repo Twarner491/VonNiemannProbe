@@ -8,10 +8,9 @@
 #include <Arduino.h> //Arduino Parent Lib
 #include <SoftwareSerial.h> //software serial library, native in base installation of ide
 
-SoftwareSerial HC06(10, 11); //HC06-TX Pin 10, HC06-RX to Arduino Pin 11
+SoftwareSerial HC06(0, 1); //HC06-TX Pin 10, HC06-RX to Arduino Pin 11
 
-int buzzerPin = 8; //pin of buzzer/vibrator
-int ledPin = 13;
+int buzzerPin = 2; //pin of buzzer/vibrator
 String fullString = ""; // 
 int dotLength = 1000; //establish length of 1 dot
 int dashLength = 3 * dotLength; //establish proportion of dots to dashes
@@ -19,10 +18,6 @@ int dashLength = 3 * dotLength; //establish proportion of dots to dashes
 void setup() {
   HC06.begin(9600); //Baudrate 9600 , Choose your own baudrate 
   pinMode(buzzerPin, OUTPUT);
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, HIGH);
-  delay(1000);
-  digitalWrite(ledPin, LOW);
 }
 
 void loop(){
@@ -32,29 +27,23 @@ void loop(){
     char receive = HC06.read(); //Read from Serial Communication
     if(receive =='.'){
       digitalWrite(buzzerPin, HIGH);
-      digitalWrite(ledPin, HIGH);
       delay(dotLength); //delay for dotlength
       digitalWrite(buzzerPin, LOW);
-      digitalWrite(ledPin, LOW);
       delay(dotLength); //dotlength delay between next character
     }
     if(receive == '-')
     {
     digitalWrite(buzzerPin, HIGH);
-    digitalWrite(ledPin, HIGH);
     delay(dashLength);
     digitalWrite(buzzerPin, LOW);
-    digitalWrite(ledPin, LOW);
     delay(dotLength); //dot length delay between next character
     }
     if(receive =='9'){
       digitalWrite(buzzerPin, LOW);
-      digitalWrite(ledPin, LOW);
       delay(dotLength * 2); //delay for another 2 seconds if space, gives 3 seconds total division between letters - make proportional to actual thing
     }
     else {
       digitalWrite(buzzerPin, LOW);
-      digitalWrite(ledPin, LOW);
       delay(5);
     }
   }

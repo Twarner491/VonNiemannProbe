@@ -3796,25 +3796,23 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <busses>
 </busses>
 <nets>
-<net name="N$4" class="0">
+<net name="RX" class="0">
 <segment>
-<pinref part="HC-06" gate="J1" pin="3"/>
-<wire x1="-2.54" y1="20.32" x2="2.54" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="2.54" y1="20.32" x2="2.54" y2="17.78" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="PA7/RXD/AR1"/>
 <wire x1="2.54" y1="17.78" x2="10.16" y2="17.78" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$5" class="0">
-<segment>
 <pinref part="HC-06" gate="J1" pin="4"/>
-<wire x1="-2.54" y1="22.86" x2="5.08" y2="22.86" width="0.1524" layer="91"/>
-<wire x1="5.08" y1="22.86" x2="5.08" y2="20.32" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="PA6/TXD/DAC/AR0"/>
-<wire x1="5.08" y1="20.32" x2="10.16" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="-2.54" y1="22.86" x2="2.54" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="22.86" x2="2.54" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$2" class="0">
+<net name="TX" class="0">
+<segment>
+<pinref part="U$1" gate="G$1" pin="PA6/TXD/DAC/AR0"/>
+<pinref part="HC-06" gate="J1" pin="3"/>
+<wire x1="10.16" y1="20.32" x2="-2.54" y2="20.32" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="UPDI" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="PA0/UPDI/AR5"/>
 <pinref part="UPDI" gate="J$1" pin="3"/>
@@ -3822,7 +3820,7 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <wire x1="66.04" y1="17.78" x2="66.04" y2="33.02" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$3" class="0">
+<net name="BUZZER" class="0">
 <segment>
 <pinref part="BUZZER" gate="G$1" pin="1"/>
 <pinref part="U$1" gate="G$1" pin="PA1/SDA/MOSI/AR2"/>
@@ -3873,7 +3871,7 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <junction x="0" y="-12.7"/>
 </segment>
 </net>
-<net name="N$8" class="0">
+<net name="5V" class="0">
 <segment>
 <pinref part="C6" gate="G$1" pin="2"/>
 <pinref part="U1" gate="G$1" pin="OUT"/>
@@ -3903,7 +3901,7 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <wire x1="-17.78" y1="27.94" x2="7.62" y2="27.94" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$1" class="2">
+<net name="VCC" class="2">
 <segment>
 <pinref part="9V-IN" gate="G$1" pin="1"/>
 <wire x1="-5.08" y1="0" x2="-2.54" y2="0" width="0.1524" layer="91"/>
