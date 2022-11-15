@@ -150,12 +150,14 @@ def getPlayerMove(move):
         getPlayerMove(newMove)
         return #back to game loop
 
-def toMorse(move):
-    ret = ''
-    newConvert = ''
+def toMorse(move): #convert move to morse code
+    ret = "" #empty morse conversion
+    newConvert = "" #empty mid-conversion string
     for char in move:
-        newConvert = morseDict(char)
-        ret += newConvert + '' #add morse for char, space for later encoding
+        #print("converting " + char) #debug print
+        newConvert = morseDict[char] #take key of char index in morse dict
+        ret += newConvert + ' ' #add morse for new char to morse string
+    print("Morse-Converted Move: " + ret)
     return ret
 
 def sendMove(morse):
