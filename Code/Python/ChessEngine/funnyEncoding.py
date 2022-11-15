@@ -7,6 +7,9 @@
 
 #download stockfish from https://stockfishchess.org/files/stockfish_15_win_x64_avx2.zip
 
+#this script doesn't use morse code
+#number of buzzes is letter or number for each char in letter/number/letter/number move sequence
+
 from stockfish import Stockfish #pip install stockfish
 import chess #pip install python-chess
 import time
@@ -24,13 +27,13 @@ port = "COM10" #set bluetooth port
 
 stockfishPath = "C:/Users/jackh/Downloads/stockfish_15_win_x64_avx2/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2.exe" #replace with the path to your Stockfish exe. Note - the path may only contain forward slashes, no backslashes.
 
-morseDict = { 'a':'.-', 'b':'-...',
-   'c':'-.-.', 'd':'-..', 'e':'.',
-   'f':'..-.', 'g':'--.', 'h':'....',
-   '1':'.----', '2':'..---', '3':'...--',
-   '4':'....-', '5':'.....', '6':'-....',
-   '7':'--...', '8':'---..'} #morse dict for all chars in chess moves, other characters not needed here
-
+morseDict = { 'a':'.', 'b':'..',
+   'c':'...', 'd':'....', 'e':'.....',
+   'f':'......', 'g':'.......', 'h':'........',
+   '1':'.', '2':'..', '3':'...',
+   '4':'....', '5':'.....', '6':'......',
+   '7':'.......', '8':'........'} #morse dict for all chars in chess moves, other characters not needed here
+   
 board = chess.Board(); #create chess board object
 
 badChars = ["i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
