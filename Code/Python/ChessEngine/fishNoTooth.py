@@ -19,7 +19,7 @@ global moveAdjusted; global badChars
 global isMate; global morseDict
 global morseMove; global stockfishPath
 
-stockfishPath = "C:/Users/twarn/Downloads/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2.exe" #replace URL with the path to your Stockfish exe. Note - the path may only contain forward slashes, no backslashes.
+stockfishPath = "C:/Users/jackh/Downloads/stockfish_15_win_x64_avx2/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2.exe" #replace URL with the path to your Stockfish exe. Note - the path may only contain forward slashes, no backslashes.
 
 morseDict = { 'a':'.-', 'b':'-...',
    'c':'-.-.', 'd':'-..', 'e':'.',
