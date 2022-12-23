@@ -58,7 +58,7 @@ def playGame(side):
             bestMove = fish.get_best_move(1000) #stockfish get best current move
             fish.make_moves_from_current_position([bestMove]); 
             chessMove = chess.Move.from_uci(bestMove) #create chessMove object in pychess, push it to board on next line
-            board.push_san(bestMove) ##make move in pychess to keep up with stockfish game
+            board.push_san(bestMove) #make move in pychess to keep up with stockfish game
             print("whitefish plays " + bestMove)
             morseMove = toMorse(bestMove) #call morse conversion of fish move
             sendMove(morseMove) #call to move sending function, arg is stockfish best move

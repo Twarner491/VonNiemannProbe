@@ -12,11 +12,6 @@
   This code will loop through a string of characters and convert these to morse code.  
   It will blink two LED lights and play audio on a speaker.  
  */
-<<<<<<< HEAD:C++/textToMorse/textToMorse.ino
- 
-
-char stringToMorseCode[] = "sex penis"; //static string to convert
-=======
 
 #include <Arduino.h> //Arduino Parent Lib
  
@@ -24,7 +19,6 @@ char stringToMorseCode[] = "sex penis"; //static string to convert
 //   Type the String to Convert to Morse Code Here  //
 //**************************************************//
 char stringToMorseCode[] = "teddy is cool";
->>>>>>> 3fac2310182d0152c934b33a539efb810c88ace9:Code/C++/textToMorse/textToMorse.ino
 
 int morseOutput = 13;      //pin of morse output
 int led6 = 6;        
