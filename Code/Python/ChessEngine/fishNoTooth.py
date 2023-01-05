@@ -93,7 +93,7 @@ def playGame(side):
         print("checkmate, stockfish victory!")
         print("")
         return #return to infinite loop
-#gaysex
+
 def getPlayerMove(move):
     global board; global moveAdjusted; global badChars; global morseMove
     noBadChars = True #reset no bad chars bool
