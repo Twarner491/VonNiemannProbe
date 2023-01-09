@@ -174,4 +174,4 @@ while True: #enables playing of inifinite games, playGame() returns to here afte
     print("good chess speaks for itself, welcome to Von Niemann Probe")
     print("side of stockfish:") #request side of stockfish player
     fishSide = input() #which side is hans niemann on?
-    playGame(fishSide) #initiate game with advantage player's side receiving hints based on other player's moves
+    playGame(fishSide) #initiate game with advantage player's side receiving "hints" based on other player's moves
