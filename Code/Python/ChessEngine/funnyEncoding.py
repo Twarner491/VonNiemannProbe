@@ -5,6 +5,9 @@
 #Copyright is retained and must be preserved. The work is provided as is;
 #no warranty is provided, and users accept all liability.
 
+# Contributors - 
+# - Solanaceae
+
 #download stockfish from https://stockfishchess.org/files/stockfish_15_win_x64_avx2.zip
 
 #this script doesn't use morse code
@@ -12,7 +15,7 @@
 
 from stockfish import Stockfish #pip install stockfish
 import chess #pip install python-chess
-import serial
+import serial # pip install pyserial
 import re #pip install regex
 
 global board
@@ -26,7 +29,6 @@ global morseDict
 global morseMove
 global port
 global stockfishPath
-
 
 def play_game(side):
     global board
@@ -171,7 +173,6 @@ def send_move(morse, ser):
 
     # Print a message indicating that the move has been sent
     print("Move sent")
-
 
 # set Bluetooth port
 port = "COM10"
