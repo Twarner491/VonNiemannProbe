@@ -1,21 +1,30 @@
 # Von Niemann Probe
 ### Devoloped by [Teddy Warner](https://teddywarner.org/About-Me/about/) and [Jack Hollingsworth](http://fabacademy.org/2021/labs/charlotte/students/jack-hollingsworth/about/).
 
-**A AVR based bluetooth telegraph inlayed in a parametric shoe insole that lets you play chess like Hans Niemann!**
+**An AVR-based Bluetooth telegraphing shoe insole that lets you play chess in the way Hans Niemann has been accused!** This project is our contribution to the ongoing investigation into the Hans Niemann / Magnus Carlsen cheating scandal and tests the feasibility of creating and using an over-the-board chess cheating aid.
 
 ### Check out the Von Niemann Probe's documentation on [TeddyWarner.org](https://teddywarner.org/Projects/VonNiemannProbe/)!
 
+**© Teddy Warner & Jack Hollingsworth- 2022**
+> This work may be reproduced, modified, distributed, performed, and displayed for any purpose,
+> but must acknowledge Teddy Warner. Copyright is retained and must be preserved. 
+> The work is provided as is; no warranty is provided, and users accept all liability.
+
+### Sponsor -
+<a href="https://www.pcbway.com/"><img src="https://teddywarner.org/images/VonNiemannProbe/PCBWay.png" width="150"></a>
+
 ## Python Dependencies - 
 
-Various Python dependencies are needed to run the VNPFinal.py script, but overall the installation is pretty lightweight. The only change that needs to be made locally is the path of your stockfish .exe, which must be downlaoded from [here](https://stockfishchess.org/download/) prior to use. Any version of Stockfish should work, but we have only tested on the latest version (Version 15). 
+Various Python dependencies are needed to run the VNPFinal.py script, but overall the installation is pretty lightweight. The only change that needs to be made locally is the path of your stockfish .exe, which must be downloaded from [here](https://stockfishchess.org/download/) prior to use. Any version of Stockfish should work, but we have only tested on the latest version (Version 15). 
 <br/><br/>
 The outgoing COM port of the Bluetooth module must be updated, this can be found in device manager in all Windows 7+ machines. 
 Install commands for all Python dependencies are below, any release past Python 3.7 will work.
 
 ```python
-pip install regex
-pip install python-chess
 pip install stockfish
+pip install python-chess
+pip install pyserial
+pip install regex
 ```
 
 ## Sources -
