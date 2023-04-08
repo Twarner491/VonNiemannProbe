@@ -12,169 +12,225 @@
 
 from stockfish import Stockfish #pip install stockfish
 import chess #pip install python-chess
-import time
 import serial
 import re #pip install regex
 
-global board; global fish
-global legal; global legalMoves
-global moveAdjusted; global badChars
-global isMate; global morseDict
-global morseMove; global port 
+global board
+global fish
+global legal
+global legalMoves
+global moveAdjusted
+global badChars
+global isMate
+global morseDict
+global morseMove
+global port
 global stockfishPath
 
-port = "COM10" #set bluetooth port
 
-stockfishPath = "C:/Users/jackh/Downloads/stockfish_15_win_x64_avx2/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2.exe" #replace with the path to your Stockfish exe. Note - the path may only contain forward slashes, no backslashes.
+def play_game(side):
+    global board
+    fish = chess.engine.SimpleEngine.popen_uci("stockfish")
+    mate = False  # checkmate state declaration
+    turns = 0
+    board = chess.Board()
 
-morseDict = { 'a':'.', 'b':'..',
-   'c':'...', 'd':'....', 'e':'.....',
-   'f':'......', 'g':'.......', 'h':'........',
-   '1':'.', '2':'..', '3':'...',
-   '4':'....', '5':'.....', '6':'......',
-   '7':'.......', '8':'........'} #morse dict for all chars in chess moves, other characters not needed here
-   
-board = chess.Board(); #create chess board object
-
-badChars = ["i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
-"9", "0"] #chars that can't be in a legal chess move
-
-morseMove = "" #placeholder for morse code move, filled later
-
-fish = Stockfish(r"{0}".format(stockfishPath), 
-depth=18, parameters={"Threads": 4, "Hash": 256, "UCI_LimitStrength": "false"}) #stockfish object declaration, can regulate strength
-print("WDL Accepted " + str(fish.does_current_engine_version_have_wdl_option()))
-print("Board State " + fish.get_board_visual()) #prints unicode image of current board state
-
-ser = serial.Serial(port, 9600, timeout = 1) #open com port of hc-06 receiving, set to 9600 baud
-print("serial opened")
-
-def playGame(side):
-    global legal; global legalMoves
-    global board; global isMate; global morseMove; 
-    mate = False #checkmate state declaration
-    turns = 0; i = 0 #these could be the same, but easier to keep sep = SPAGHETTIOLI CODE MOMENT
-    board = chess.Board(); #declare chess board object in pychess module, for checking legality of moves
-    print("fish playing as " + side)
+    print(f"fish playing as {side}")
     if side == "white":
-        while mate == False: #if game not over, play continues
-            bestMove = fish.get_best_move(1000) #stockfish get best current move
-            fish.make_moves_from_current_position([bestMove]); 
-            chessMove = chess.Move.from_uci(bestMove) #create chessMove object in pychess, push it to board on next line
-            board.push_san(bestMove) ##make move in pychess to keep up with stockfish game
-            print("whitefish plays " + bestMove)
-            morseMove = toMorse(bestMove) #call morse conversion of fish move
-            sendMove(morseMove) #call to move sending function, arg is stockfish best move
-            mate = board.is_checkmate() #returns state of checkmate
-            print("Checkmate: " + str(mate)) #prints state of checkmate after every fish move
-            if mate == True:
+        while not mate:  # if game not over, play continues
+            # stockfish get best current move
+            best_move = fish.play(board, chess.engine.Limit(time=1.0)).move
+            board.push(best_move)  # make move in pychess to keep up with stockfish game
+            print(f"whitefish plays {best_move}")
+            mate = board.is_checkmate()  # returns state of checkmate
+            print(f"Checkmate: {mate}")
+            if mate:
                 print("checkmate, stockfish victory!")
-                return
+                break
             turns += 1
-            legalMoves = str(board.legal_moves) #convert list to string
-            print("black move:") #request player move
+            # request player move
+            print("black move:")
             move = input()
-            getPlayerMove(move)
-            mate = board.is_checkmate() #check if player has won
-            if mate == True:
-               print("checkmate, player victory")
-               return
+            try:
+                board.push_san(move)
+            except ValueError:
+                print("Invalid move")
+                continue
+            mate = board.is_checkmate()  # check if player has won
+            if mate:
+                print("checkmate, player victory")
+                break
             turns += 1
-            print("board after " + str(turns) + " moves:")
-            print(fish.get_board_visual(False)) #shows board from player perspective (white)
+            # shows board from player perspective (white)
+            print(f"board after {turns} moves:")
+            print(board)
+
         print("")
-        return #return to infinite loop
+        fish.quit()  # close Stockfish engine
+        return  # return to infinite loop
+
     if side == "black":
-        legalMoves = str(board.legal_moves) #convert list to string
-        while mate == False:
+        while not mate:
+            # request player move
             print("white move:")
             move = input()
-            getPlayerMove(move)
-            mate = board.is_checkmate() #check if player has won
-            if mate == True:
-               print("checkmate, player victory")
-               return
-            bestMove = fish.get_best_move(1000) #stockfish get best current move
-            fish.make_moves_from_current_position([bestMove]); 
-            chessMove = chess.Move.from_uci(bestMove)
-            board.push_san(bestMove)
-            print("blackfish plays " + bestMove)
-            morseMove = toMorse(bestMove) #get string of morse-converted move, not in use
-            sendMove(morseMove) #send morse move via bluetooth
-            mate = board.is_checkmate() #returns state of checkmate
-            print("Checkmate: " + str(mate)) #prints state of checkmate after every fish move
-            if mate == True:
+            try:
+                board.push_san(move)
+            except ValueError:
+                print("Invalid move")
+                continue
+            mate = board.is_checkmate()  # check if player has won
+            if mate:
+                print("checkmate, player victory")
+                break
+            # stockfish get best current move
+            best_move = fish.play(board, chess.engine.Limit(time=1.0)).move
+            board.push(best_move)
+            print(f"blackfish plays {best_move}")
+            mate = board.is_checkmate()  # returns state of checkmate
+            print(f"Checkmate: {mate}")
+            if mate:
                 print("checkmate, stockfish victory!")
-                return
+                break
             turns += 1
-            print("board after " + str(turns) + " moves:")
-            print(fish.get_board_visual()) #shows board from player perspective (black)
-        print("")
-        return #return to infinite loop
+            # shows board from player perspective (black)
+            print(f"board after {turns} moves:")
+            print(board)
 
-def getPlayerMove(move):
-    global board; global moveAdjusted; global badChars; global morseMove
-    noBadChars = True #reset no bad chars bool
-    legal = False #reset illegal bool
-    charCount = 0; numCount = 0
-    for char in move: #check if badChars exist in move
-        i = 0 #reset iterating var
-        while i < len(badChars):
-            badChar = badChars[i]
-            if char == badChar:
-                print(char + ' is ILLEGAL')
-                noBadChars = False #set bool to reflect bad char
-            if char.isalpha() == True:
-                charCount += 1 #reflect that at least 1 char in string
-            if char.isdigit() == True:
-                numCount += 1 #reflect that at least one number in string
-            i += 1
-            #print(char + "is legal") #debug bad chars function
-    if len(move) != 4 and len(move) != 5: #solve edge case where small string doesn't break other rules
-        noBadChars = False;
-    if charCount == 0 or numCount == 0:
-        print("numbers: " + str(numCount))
-        print("chars " + str(charCount))
-        noBadChars = False #change bool to reflect bad formatting
-    if noBadChars == True: #only creative move objects if correct formatting
-        print(move + " is good format")
-        myMove = chess.Move.from_uci(move) #create move object frmo current player move, used to check legality
-        legal = board.is_legal(myMove) #checks legality of desired move
-        print("Legal? " + str(legal))
-    if legal and noBadChars: #move can only happen if legal and doesn't contain illegal chars
-        fish.make_moves_from_current_position([move])#plays legal player move in STOCKFISH
-        chessMove = chess.Move.from_uci(move) #load legal player move
-        board.push_san(move) #send player move to board tracker
-        print("player plays " + move)
-        return #back to game loop
+        print("")
+        fish.quit()  # close Stockfish engine
+        return  # return to infinite loop
+
+def get_player_move(move):
+    global board, moveAdjusted, badChars, morseMove
+    
+    no_bad_chars = True #reset flag for bad characters
+    legal = False #reset flag for illegal move
+    char_count = 0
+    num_count = 0
+    
+    # Check for bad characters in the move string
+    for char in move:
+        if char in badChars:
+            print(f'{char} is ILLEGAL')
+            no_bad_chars = False
+        if char.isalpha():
+            char_count += 1
+        if char.isdigit():
+            num_count += 1
+    
+    # Check if move string has correct formatting
+    if len(move) not in [4, 5]:
+        no_bad_chars = False
+    if char_count == 0 or num_count == 0:
+        print(f"numbers: {num_count}")
+        print(f"chars {char_count}")
+        no_bad_chars = False
+        
+    # Create move object and check legality if move string is correctly formatted
+    if no_bad_chars:
+        print(f"{move} is in good format")
+        my_move = chess.Move.from_uci(move)
+        legal = board.is_legal(my_move)
+        print(f"Legal? {legal}")
+    
+    # Play the move if it's legal and correctly formatted, otherwise prompt for a new move
+    if legal and no_bad_chars:
+        fish.make_moves_from_current_position([move])
+        chess_move = chess.Move.from_uci(move)
+        board.push_san(move)
+        print(f"player plays {move}")
     else:
         print("illegal move, input new move:")
-        newMove = input()
-        getPlayerMove(newMove)
-        return #back to game loop
+        new_move = input()
+        get_player_move(new_move)
 
-def toMorse(move): #convert move to morse code
+def to_morse(move): #convert move to morse code
     ret = "" #empty morse conversion
     newConvert = "" #empty mid-conversion string
+    
     for char in move:
         #print("converting " + char) #debug print
         newConvert = morseDict[char] #take key of char index in morse dict
-        ret += newConvert + ' ' #add morse for new char to morse string
-    print("Morse-Converted Move: " + ret)
+        ret += f'{newConvert} '
+        
+    print(f"Morse-Converted Move: {ret}")
     return ret
 
-def sendMove(morse):
+def send_move(morse, ser):
+    # Replace spaces in morse code with '9'
     morse = re.sub("[ ]", "9", morse)
-    print(morse) #print morse move with spaces replaced with 9 - easier to parse on arduino side as empty bytes hard to work with
-    for char in morse:
-        tempChar = char.encode() #temporary placeholder set to current char in morse move
-        ser.write(tempChar) #send individual character of final morse message encoded in utf-8
-    print("sent move")
-    return
 
-while True: #enables playing of inifinite games, playGame() returns to here after checkmate, resets all local values
-    isMate = False
-    print("good chess speaks for itself, welcome to Von Niemann Probe")
-    print("side of stockfish:") #request side of stockfish player
-    fishSide = input() #which side is hans niemann on?
-    playGame(fishSide) #initiate game with advantage player's side receiving hints based on other player's moves
+    # Print the modified morse code for debugging
+    print(f"Sending morse code: {morse}")
+
+    # Encode each character in the morse code as UTF-8 and send it to the serial device
+    for char in morse:
+        encoded_char = char.encode('utf-8')
+        ser.write(encoded_char)
+
+    # Print a message indicating that the move has been sent
+    print("Move sent")
+
+
+# set Bluetooth port
+port = "COM10"
+
+# replace with the path to your Stockfish executable file
+stockfishPath = "C:/Users/jackh/Downloads/stockfish_15_win_x64_avx2/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2.exe"
+
+# Morse code dictionary for all characters in chess moves
+morseDict = {
+    'a': '.',
+    'b': '..',
+    'c': '...',
+    'd': '....',
+    'e': '.....',
+    'f': '......',
+    'g': '.......',
+    'h': '........',
+    '1': '.',
+    '2': '..',
+    '3': '...',
+    '4': '....',
+    '5': '.....',
+    '6': '......',
+    '7': '.......',
+    '8': '........'
+}
+
+# create a new chess board
+board = chess.Board()
+
+# characters that can't be in a legal chess move
+badChars = ["i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "9", "0"]
+
+# placeholder for Morse code move, filled later
+morseMove = ""
+
+# create a Stockfish engine object
+fish = Stockfish(stockfishPath, depth=18, parameters={"Threads": 4, "Hash": 256, "UCI_LimitStrength": "false"})
+
+# check if the engine version supports WDL option
+print(f"WDL Accepted: {str(fish.does_current_engine_version_have_wdl_option())}")
+
+# print the board state
+print(f"Board State: {fish.get_board_visual()}")
+
+# open the serial port for HC-06 receiving, set to 9600 baud
+ser = serial.Serial(port, 9600, timeout=1)
+
+# print message indicating the serial port is opened
+print("Serial opened")
+
+# set the flag for checkmate status
+isMate = False
+
+# play an infinite number of games
+while True:
+    # print message indicating the start of the game
+    print("Good chess speaks for itself, welcome to Von Niemann Probe")
+    # ask the player for the side of Stockfish
+    fishSide = input("Which side is Hans Niemann on? ")
+    # initiate the game with the advantage player's side receiving hints based on the other player's moves
+    play_game(fishSide)
